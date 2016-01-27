@@ -58,7 +58,6 @@ def main():
     wordChoices = loadWords()
     computersWord = chooseWord(wordChoices)
     computersWord = compWordToList(computersWord)
-    print computersWord #helper to see what word is
 
     correctWord = createBlankWord(computersWord)
 
