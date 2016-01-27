@@ -6,14 +6,12 @@ WORDLIST_FILENAME = "words.txt"
 
 def loadWords():
     
-    print "Loading word list from file..."
     # inFile: file
     inFile = open(WORDLIST_FILENAME, 'r', 0)
     # line: string
     line = inFile.readline()
     # wordlist: list of strings
     wordlist = string.split(line)
-    print "  ", len(wordlist), "words loaded."
     return wordlist
 
 def chooseWord(words):
@@ -23,13 +21,13 @@ def chooseWord(words):
 def userGuess():
 
     letter = raw_input("Please guess a letter > ")
-    return letter
+    return letter.lower()
 
 
 def lettersRemaining(letter, listOne):
 
     listOne.append(letter)
-    print "Here are the letters you have guessed", ", ".join(listOne)
+    print "Here are the letters you have guessed", ", ".join(listOne) + '\n'
     return listOne
 
 
@@ -67,13 +65,19 @@ def main():
     guessedList = []
     guesses = 10
     
-    print "Hi there welcome Pete's Hangman Game!"
+    print "Hi there welcome Pete's Hangman Game!\n"
     while(guesses > 0):
         print "You have", guesses, "guesses to discover the chosen word"
         userLetter = userGuess()
         guessedList = lettersRemaining(userLetter, guessedList)
         correctWord = letterCheck(userLetter, computersWord, correctWord)
-        print ' '.join(correctWord)
+        if correctWord == computersWord:
+            print "You got it!\n"
+            print ' '.join(correctWord)
+            print 'Game Over'
+            guesses = 0
+        else:
+            print ' '.join(correctWord) + '\n'
         guesses -= 1
 
             
